@@ -1,0 +1,80 @@
+{
+	"refs" : {
+		"dummyboard-4-envvars" : {
+			"DUMMY_BOARD_ADDRESS": "dummylocal-4's address"
+		},
+		"dummy-3-str-override" : {
+			"echo_str": "Hello from sync file \"parameter-default-override\" with a #|ref"
+		}
+	},
+	"nodes": {
+		"dummyboard-1": {
+			"board-chunk": "board/dummyboard",
+			"parametrization-files": [ "board/dummyboard-1.json" ]
+		},
+		"dummyboard-2": {
+			"board-chunk": "board/dummyboard",
+			"parametrization-inline": {
+				"environment-variable-overrides": {
+					"DUMMY_BOARD_ADDRESS": "dummylocal-2's address"
+				}
+			}
+		},
+		"dummyboard-3": {
+			"board-chunk": "board/dummyboard",
+			"parametrization-inline": {
+				"environment-variable-overrides": {
+					"DUMMY_BOARD_ADDRESS": "dummylocal-3's address"
+				}
+			}
+		},
+		"dummyboard-4": {
+			"board-chunk": "board/dummyboard",
+			"parametrization-inline": {
+				"environment-variable-overrides": {
+					"#|ref: dummyboard-4-envvars": null
+				}
+			}
+		}
+	},
+	"tests": {
+		"jobs/dummyboard/dummy-1": {
+			"test-chunk": "test/dummy-test",
+			"board-chunk": "board/dummyboard",
+			"extra-labels": [ "dummyboard", "dummyboard-1" ],
+			"parametrization-files": [
+				"test/dummy-test-succeeding.json"
+			]
+		},
+		"jobs/dummyboard/dummy-2": {
+			"test-chunk": "test/dummy-test",
+			"board-chunk": "board/dummyboard",
+			"extra-labels": [ "dummyboard", "dummyboard-2" ],
+			"parametrization-inline": {
+				"parameter-default-overrides": {
+					"echo_str": "Hello from sync file \"parameter-default-override\""
+				}
+			}
+		},
+		"jobs/dummyboard/dummy-3": {
+			"test-chunk": "test/dummy-test",
+			"board-chunk": "board/dummyboard",
+			"extra-labels": [ "dummyboard", "dummyboard-3" ],
+			"parametrization-inline": {
+				"parameter-default-overrides": {
+					"#|ref: dummy-3-str-override": null
+				}
+			}
+		},
+		"jobs/dummyboard/dummy-4": {
+			"test-chunk": "test/dummy-test",
+			"board-chunk": "board/dummyboard",
+			"extra-labels": [ "dummyboard", "dummyboard-4" ]
+		}
+	},
+	"pipelines" : {
+		"testplans/daily-dummy": {
+			"file": "daily-dummy.json"
+		}
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"parameters" : {
+		"install_oe_sdks": {
+			"default": "",
+			"description": [
+				"Space separate list of <dstdir>=<url> pairs. E.g.",
+				" \"/opt/mach1=http://srv/file /opt/mach2=http://srv/file\"" ]
+		}
+	}
+}

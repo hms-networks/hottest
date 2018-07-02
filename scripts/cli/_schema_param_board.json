@@ -1,0 +1,17 @@
+{
+    "description": "additional board parametrization",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "_schema_param_board.json",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "extra-node-labels" : {
+            "description": "Additional labels on the board/node.",
+            "$ref": "file:_schema_chunk_board.json#/definitions/node-labels"
+        },
+        "environment-variable-overrides" : {
+            "description": "Override of the node environment variable values. It is a dictionary with the key containing the environment variable name and the value containing the new value.",
+            "$ref": "file:_schema_chunk_board.json#/definitions/environment-variables"
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+	"parameters" : {
+		"oe_sdk_envsetup_script": {
+			"default": "",
+			"description": "Path to the OE toolchain environment setup script"
+		}
+	}
+}

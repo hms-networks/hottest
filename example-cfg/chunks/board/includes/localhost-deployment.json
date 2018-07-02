@@ -1,0 +1,12 @@
+{
+	"parameters": {
+		"dummy_bootloader" : {
+			"default": "dummy-bootloader.bin",
+			"description": "Dummy Bootloader"
+		},
+		"dummy_img" : {
+			"default": "dummy-img.bin",
+			"description": "Dummy Image"
+		}
+	}
+}

@@ -1,0 +1,13 @@
+This folder contains all the chunks for implementing the "dut_*" functions
+on the "dummyboard" dummy board.
+
+Note that the includes subfolder contains more chunks. On a real scenario this
+would allow to reuse some functionality between many boards on the same lab.
+
+Yo can see insde "dummyboard.json" that:
+
+-The "DUMMY_BOARD_ID" environment variable is defined and can be used from the
+tests. If you look at
+
+-The "dummyboard" label is defined, so tests can require to be run only on a
+ jenkins slave (board) that has this label.

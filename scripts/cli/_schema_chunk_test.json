@@ -1,0 +1,44 @@
+{
+    "description": "regular test chunk",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "_schema_chunk_test.json",
+    "type": "object",
+    "additionalProperties": false,
+    "definitions": {
+        "description": {
+            "description": "Chunk description/comment. It gets promoted as Jenkins test description on the test root chunk. Otherwise discarded",
+            "$ref":  "file:_schema_common.json#/definitions/multistring"
+        },
+        "test-labels": {
+            "description": "Required labels on the board/node for this test.",
+            "$ref":  "file:_schema_common.json#/definitions/unique-string-array"
+        },
+        "parameters": {
+            "description": "Test parameters. They will map to Jenkins parameters.",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_\\-]*$" : {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "description": {
+                            "description": "Parameter description.",
+                            "$ref":  "file:_schema_common.json#/definitions/multistring"
+                        },
+                        "default": {
+                            "description": "Parameter default value.",
+                            "$ref":  "file:_schema_common.json#/definitions/multistring"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "properties": {
+        "description": { "$ref": "#/definitions/description" },
+        "test-labels": { "$ref": "#/definitions/test-labels" },
+        "parameters": { "$ref": "#/definitions/parameters" }
+    }
+}

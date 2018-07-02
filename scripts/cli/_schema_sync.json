@@ -1,0 +1,112 @@
+{
+    "description": "server description file for syncing",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "_schema_sync.json",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "refs" : {
+            "description" : "Parameter/enviroment variable groups to be referenced (copy-pasted) on test and node dictionaries by using the \"#|ref:<name of this object>:null\" special value.",
+            "$ref": "file:_schema_common.json#/definitions/variable-references"
+        },
+        "nodes": {
+            "description": "Jenkins nodes on the server instance",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_\\-]*$" : {
+                    "description" : "Node to create (the name is the dictionary key)",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["board-chunk"],
+                    "properties": {
+                        "board-chunk": {
+                            "description": "Relative path to the board chunk files.",
+                            "type": "string"
+                        },
+                        "parametrization-files": {
+                            "description": "List of relative paths to the board parametrization files.",
+                            "$ref":  "file:_schema_common.json#/definitions/unique-string-array"
+                        },
+                        "parametrization-inline" : {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "extra-node-labels": {
+                                    "$ref": "file:_schema_chunk_board.json#/definitions/node-labels"
+                                },
+                                "environment-variable-overrides": {
+                                    "$ref": "file:_schema_chunk_board.json#/definitions/environment-variables"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "tests": {
+            "description": "Jenkins tests on the server instance",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_\\-/]*$" : {
+                    "description" : "Test to create (the name is the dictionary key)",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["board-chunk", "test-chunk"],
+                    "properties": {
+                        "board-chunk": {
+                            "description": "Relative path to the board chunk files.",
+                            "type": "string"
+                        },
+                        "test-chunk": {
+                            "description": "Relative path to the test chunk files.",
+                            "type": "string"
+                        },
+                        "extra-labels": {
+                            "description": "List of extra labels for the test.",
+                            "type": "array",
+                            "items": { "type": "string" },
+                            "uniqueItems": true
+                        },
+                        "parametrization-files": {
+                            "description": "List of relative paths to the test chunk parametrization files.",
+                            "$ref":  "file:_schema_common.json#/definitions/unique-string-array"
+                        },
+                        "parametrization-inline" : {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "test-labels-extra": {
+                                    "$ref": "file:_schema_chunk_test.json#/definitions/test-labels"
+                                },
+                                "parameter-default-overrides": {
+                                    "$ref":  "file:_schema_param_test.json#/definitions/parameter-default-overrides"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "pipelines": {
+            "description": "Jenkins pipelines on the server instance",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_\\-/]*$" : {
+                    "description" : "Pipeline to create (the name is the dictionary key)",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["file"],
+                    "properties": {
+                        "file": {
+                            "description": "Relative path to the pipeline file.",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

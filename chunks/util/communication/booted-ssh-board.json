@@ -1,0 +1,23 @@
+{
+	"parameters": {
+		"dut_ssh_user": {
+			"default": "root",
+			"description": "SSH user"
+		},
+		"dut_ssh_scp_extra_args": {
+			"default": "-oStrictHostKeyChecking=no",
+			"description": "Extra arguments to be passed to SCP."
+		},
+		"dut_ssh_ssh_extra_args": {
+			"default": "-oStrictHostKeyChecking=no",
+			"description": "Extra arguments to be passed to SSH."
+		},
+		"dut_ssh_sshpass_args": {
+			"default": "-p \"\"",
+			"description": [
+				"Arguments to be passed to \"sshpass\" whe -i is not present",
+				"on either dut_ssh_ssh_extra_args or dut_ssh_scp_extra_args."
+			]
+		}
+	}
+}

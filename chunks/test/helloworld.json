@@ -1,0 +1,10 @@
+{
+	"description": "Hottest helloworld",
+	"test-labels": [],
+	"parameters": {
+		"helloworld_text": {
+			"default": "default hello world message",
+			"description": "Message to show"
+		}
+	}
+}

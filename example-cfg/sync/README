@@ -1,0 +1,7 @@
+This file contains the full definition of a LAB setup, with boards, tests and
+testplans.
+
+Let's assume that your PWD is on the repository root, to sync this setup on an
+empty Jenkins instance you have to run:
+
+> scripts/cli/sync.py http://localhost:8080 $USER <JENKINS TOKEN> sync -f example-cfg/sync/localsetup.json -c "chunks;example-cfg/chunks/" -l example-cfg/pipelines/ -p example-cfg/parametrization/

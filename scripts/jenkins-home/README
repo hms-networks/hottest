@@ -1,0 +1,4 @@
+Place here all the scripts that have to be available from Jenkins at runtime.
+They will be symlinked to "$JENKINS_HOME/hottest". Note that folder hierarchies
+won't be respected. Every file will be copied at the root
+($JENKINS_HOME/hottest).

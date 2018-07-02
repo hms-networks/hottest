@@ -1,0 +1,22 @@
+{
+    "description": "additional test parametrization",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "_schema_param_test.json",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "test-labels-extra": {
+            "description" : "Added labels to the test job.",
+            "$ref": "file:_schema_chunk_test.json#/definitions/test-labels"
+        },
+        "parameter-default-overrides": {
+            "$ref": "#/definitions/parameter-default-overrides"
+        }
+    },
+    "definitions" : {
+        "parameter-default-overrides": {
+            "description": "Override of the default values on Jenkins job parameters. It is a dictionmary with the key containing the build parameter name and the value containing the new default value.",
+            "$ref":  "file:_schema_common.json#/definitions/var-values-dict"
+        }
+    }
+}

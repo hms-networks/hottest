@@ -1,0 +1,6 @@
+{
+	"extra-node-labels": ["anotherlabel"],
+	"environment-variable-overrides": {
+		"DUMMY_BOARD_ADDRESS": "dummylocal-1's address"
+	}
+}

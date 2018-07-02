@@ -1,0 +1,5 @@
+{
+	"parameter-default-overrides": {
+		"some_test_result" : "0"
+	}
+}

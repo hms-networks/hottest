@@ -1,0 +1,31 @@
+{
+    "description": "board test chunk",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "_schema_chunk_board.json",
+    "type": "object",
+     "additionalProperties": false,
+    "properties": {
+        "description": {
+            "description": "Board description shown on Jenkins.",
+            "$ref":  "file:_schema_common.json#/definitions/multistring"
+        },
+        "node-labels": { "$ref":  "#/definitions/node-labels" },
+        "environment-variables": {
+            "$ref":  "#/definitions/environment-variables"
+        },
+        "parameters": {
+            "description": "Board chunks double as board and regular chunks",
+            "$ref":  "file:_schema_chunk_test.json#/definitions/parameters"
+        }
+    },
+    "definitions" : {
+        "node-labels": {
+            "description": "Jenkins build node labels.",
+            "$ref":  "file:_schema_common.json#/definitions/unique-string-array"
+        },
+        "environment-variables": {
+            "description": "Jenkins node environment variables. Available on the shell scripts.",
+            "$ref":  "file:_schema_common.json#/definitions/var-values-dict"
+        }
+    }
+}

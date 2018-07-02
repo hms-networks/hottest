@@ -1,0 +1,36 @@
+{
+	"parameters": {
+		"__verbose": {
+			"default": "0",
+			"description": "Verbose log. 0=disabled."
+		},
+		"__step_timeouts": {
+			"default": "default=1.5m test_run=2.5m",
+			"description": [
+				"\"=\" separated key-value list with timeouts for each step.\n",
+				"\n",
+				"The keys can be (in descending priority order in case of",
+				"multiple matches):\n",
+				"-Any individual step function name that was scheduled on",
+				"the test job by using the \"add_step_\" function family.\n",
+				"-Predefined steps: [dut_power_on, dut_power_off, dut_boot]\n",
+				"-Step groups: [before_dut_power_on, after_dut_power_on, ",
+				"before_test_run, test_run, after_test_run, before_exit]\n",
+				"-default, applies to all tests: [default].\n",
+				"\n",
+				"The values are timeouts specified in GNU timeout format. ",
+				"Which is floating point values with optional \"s\", \"m\",",
+				" \"h\" and \"d\" suffixes for seconds, minutes, hours and",
+				"days respectively. The 0 value disables the timeout."
+			]
+		},
+		"__step_skip_filter": {
+			"default": "",
+			"description": [
+				"Space separate list of (space-free) regexes matching against",
+				"step (function) names that will be skipped on the test run.",
+				"Useful for debugging."
+			]
+		}
+	}
+}

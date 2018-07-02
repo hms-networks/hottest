@@ -1,0 +1,39 @@
+{
+    "description": "common objects",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "_schema_common.json",
+    "definitions": {
+        "multistring": {
+           "description": "Either a string or array of strings (for clarity on the .JSON file)",
+           "oneOf" : [
+               { "type": "string" },
+               { "type": "array", "items": { "type": "string" } }
+           ]
+        },
+        "unique-string-array": {
+            "description": "Array of unique strings.",
+            "type": "array",
+            "items": { "type": "string" },
+            "uniqueItems": true
+        },
+        "var-values-dict" : {
+            "description": "A dictionary of environment variables and its string values",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_\\-]*$" : {
+                    "$ref":  "#/definitions/multistring"
+                }
+            }
+        },
+        "variable-references" : {
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_\\-]*$" : {
+                    "$ref": "#/definitions/var-values-dict"
+                }
+            }
+        }
+    }
+}

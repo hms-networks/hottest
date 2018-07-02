@@ -1,0 +1,14 @@
+{
+	"parameters" : {
+		"login_prompt_match_text": {
+			"default": " login:",
+			"description": 	[
+				"Text string to detect the login prompt."
+			],
+			"#|comment": [
+				"Note that this is added as a parameter because it may change",
+				"depending on the firmware"
+			]
+		}
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"description": "Busybox smoke test.",
+	"parameters": {
+		"busybox_command_blacklist" : {
+			"description" : "Space separated list with the names of commands to not be assumed as implemented on busybox.",
+			"default" : ""
+		}
+	}
+}

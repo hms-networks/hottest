@@ -1,0 +1,8 @@
+{
+	"#|comment": "A demo comment, ignored by the framework",
+	"description": "Dummy board connected on localhost",
+	"node-labels": ["mylabel"],
+	"environment-variables": {
+		"DUMMY_BOARD_ADDRESS" : "No ID (To be set from parametrization files)"
+	}
+}

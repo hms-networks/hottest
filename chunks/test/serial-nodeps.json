@@ -1,0 +1,24 @@
+{
+	"description": [
+		"A generic test for the serial port with no dependencies on the host",
+		" and DUT"
+	],
+	"parameters": {
+		"test_baudrates" : {
+			"default": "2400 9600 115200",
+			"description": "Space separated baud rate list"
+		},
+		"dut_dev": {
+			"default": "/dev/ttyS0",
+			"description": "Serial device on the DUT"
+		},
+		"tester_dev": {
+			"default": "/dev/ttyS0",
+			"description": "Serial device on the HOST/tester"
+		},
+		"tester_lock_name": {
+			"default": "",
+			"description": "Resource lock tag for the serial port on the tester."
+		}
+	}
+}

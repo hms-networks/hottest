@@ -1,0 +1,48 @@
+{
+    "description": "jenkins pipeline for parallel job scheduling",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "_schema_pipeline.json",
+    "additionalProperties": false,
+    "required": [ "main-execution-sequence" ],
+    "properties" : {
+        "jenkins-cron-expression": {
+            "description": "Jenkins cron expression to automatically schedule this job set",
+            "type": "string"
+        },
+        "refs" : {
+            "description" : "Parameter groups to be referenced (copy-pasted) on \"parametrized-tests\" by using the \"#|ref:<name of this object>:null\" special value.",
+            "$ref": "file:_schema_common.json#/definitions/variable-references"
+        },
+        "parametrized-tests": {
+            "description" : "Valid job names with its parameters (non-default)",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_\\/-]*$" : {
+                    "$ref": "file:_schema_common.json#/definitions/var-values-dict"
+                }
+            }
+        },
+        "serial-execution-sequences" : {
+            "description" : "Enumerations of tests (Jenkins jobs) to run serially",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_\\/-]*$" : {
+                    "description" : "Sequence name",
+                    "type": "array",
+                    "items" : {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "main-execution-sequence" : {
+            "description" : "Run steps, point to either sequences, parametrized-tests defined on this file or to test names",
+            "type": "array",
+            "items": {
+                "$ref": "file:_schema_common.json#/definitions/multistring"
+            }
+        }
+    }
+}

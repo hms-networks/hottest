@@ -1,0 +1,18 @@
+{
+	"description": "Dummy test suite",
+	"test-labels": [],
+	"parameters": {
+		"some_test_result" : {
+			"default": "0",
+			"description": "Set this to 1 to cause one of the testcases to fail"
+		},
+		"echo_str": {
+			"default": "Helloworld",
+			"description": "String to echo on the echo test"
+		},
+		"sleep_seconds_fp": {
+			"default": "0.1",
+			"description": "Seconds to sleep. Floating point format."
+		}
+	}
+}

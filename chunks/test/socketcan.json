@@ -1,0 +1,25 @@
+{
+    "description": "Transmission reception over socket can",
+    "parameters": {
+        "can_test_baudrates" : {
+            "default": "125000 500000 1000000",
+            "description": "Space separated baud rate list"
+        },
+        "can_frame_count" : {
+            "default": "50",
+            "description": "Number of frames to send"
+        },
+        "can_dut_nic": {
+            "default": "can0",
+            "description": "CAN device on the DUT"
+        },
+        "can_tester_nic": {
+            "default": "can0",
+            "description": "CAN device on the HOST/tester"
+        },
+        "can_lock_name" : {
+            "default": "",
+            "description": "Resource lock tag for the CAN port on the tester."
+        }
+    }
+}

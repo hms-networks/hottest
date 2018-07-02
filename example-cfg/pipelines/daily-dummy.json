@@ -1,0 +1,55 @@
+{
+	"jenkins-cron-expression" : "0 23 * * *",
+	"refs" : {
+		"#|comment" : [
+			"These are parameter name-value groupings that can be refered by",
+			" using the \"#|ref: name\" syntax (see below). This avoids",
+			"repeating parameter values same string groups."
+		],
+		"my-parameter-set" : {
+			"echo_str" : "Hello from daily-dummy.json's pipeline (testplan) ref property",
+			"sleep_seconds_fp" : "0.1"
+		},
+		"my-parameter-set-failing" : {
+			"#|comment" : "refs on refs is allowed",
+			"#|ref: my-parameter-set" : null,
+			"some_test_result" : "1"
+		}
+	},
+	"parametrized-tests": {
+		"#|comment" :
+			"Tests that run with non-default parameters",
+		"jobs/dummyboard/dummy-1" : {
+			"#|ref: my-parameter-set": null
+		},
+		"jobs/dummyboard/dummy-2" : {
+			"#|ref: my-parameter-set-failing": null
+		},
+		"jobs/dummyboard/dummy-3" : {
+			"echo_str" : "Hello from daily-dummy.json's pipeline (testplan) build parameter field",
+			"some_test_result" : "1"
+		}
+	},
+	"serial-execution-sequences": {
+		"#|comment" :
+			"Tests that will never run in parallel/simultaneously",
+		"my-serial-sequence" : [
+			"jobs/dummyboard/dummy-2",
+			"jobs/dummyboard/dummy-3"
+		]
+	},
+	"#|comment" : [
+		"The execution sequence for the tests, it's a sequential array of",
+		"arrays containing the test execution order. All tests on each array",
+		"entry are run in parallel before processing the next entry. Note that",
+		"strings (instead of arrays of strings) are accepted for single items",
+		"",
+		"On this file dummy-1 is scheduled first, when it's done it schedules",
+		"dummy-4 in parallel with dummy-2 and dummy-3 running in serial."
+
+	],
+	"main-execution-sequence": [
+		"jobs/dummyboard/dummy-1",
+		[ "my-serial-sequence", "jobs/dummyboard/dummy-4" ]
+	]
+}
