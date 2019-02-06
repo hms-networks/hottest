@@ -21,7 +21,7 @@ cd $JENKINS_HOME/hottest
 for f in $(find $REPO_ROOT/scripts/jenkins-home/ -type f); do
     ln -sf $f;
 done
-rm $JENKINS_HOME/hottest/README $JENKINS_HOME/hottest/hush_shell.py
+rm -f $JENKINS_HOME/hottest/README $JENKINS_HOME/hottest/hush_shell.py
 
 $REPO_ROOT/gitmodules/serio/serio --create-links --link-path=$REPO_ROOT/gitmodules/serio
 cd $JENKINS_HOME
