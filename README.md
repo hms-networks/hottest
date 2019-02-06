@@ -103,7 +103,9 @@ Install
 
 > git submodule update --init --recursive
 
-> sudo -H pip install python-jenkins xunitgen sshpass
+> sudo install sshpass gnuplot
+
+> sudo -H pip install python-jenkins xunitgen
 
 > JENKINS_HOME=<your desired jenkins install dir> scripts/install/jenkins-prepare.sh
 
