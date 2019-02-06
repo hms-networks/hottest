@@ -9,7 +9,9 @@ if [[ -z "$JENKINS_HOME" ]]; then
     exit 1
 fi
 
-mkdir -p $JENKINS_HOME
+mkdir -p "$JENKINS_HOME"
+JENKINS_HOME=$(readlink -f "$JENKINS_HOME")
+
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT=$DIR/../..
 
@@ -35,7 +37,7 @@ if you don't have jenkins.war:
 
  wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
 
-Install the jenkins instance with the recommended set of plugins only. Follow
+Install the Jenkins instance with the recommended set of plugins only. Follow
 the Jenkins install instructions.
 
 INFO
