@@ -16,7 +16,9 @@ add_step_before_dut_power_on validate_jenkins_variables
 add_required_host_executables cc
 
 # We add a task to do before the test even starts (before powering on), which is
-# compiling a dummy helloworld application.
+# compiling a dummy helloworld application. Notice that the crosscompile module
+# (util/crosscompilation/crosscompile) isn't used because this dummy example is
+# going to run on the local host.
 function crosscompile_localhost_helloworld() {
     printf "#include <stdio.h>\nint main(void) { printf (\"${echo_str}\\\n\"); return 0; }\n" > hello.c
     cc hello.c -o hello
@@ -30,8 +32,8 @@ function transfer_localhost_helloworld() {
 }
 add_step_before_test_run transfer_localhost_helloworld
 
-# We add a validation function before running the test itself, so we don't
-# clutter it.
+# We add a dummy validation function before running the test itself, so we don't
+# clutter the test function with validation. This is just cosmetic.
 function dummy_test_validation() {
     echo "Dummy test validation"
     if ! dut_cmd "which hello" > /dev/null; then
@@ -46,13 +48,15 @@ add_step_before_test_run dummy_test_validation
 # Test case pre-declaration on the global scope is required. This is verbose
 # but done by design:
 #
-# 1. Doing it on the preprocessor wouldn't allow bash substitutions on test
-#    names (test with variable test case amounts, as e.g. the serial port
-#    tests).
-# 2. As the Jenkins job only succeed when all the tests PASS, It allows to
-#    return from any function at any point without carrying return codes while
-#    generating a valid test report with all cases marked as "not run".
-# 3. The framework can also generate reports in the presence of breaks/signals.
+# 1. As the Jenkins job only succeeds when all the tests PASS, It allows to
+#    return from any function at any point without caring about return codes
+#    while still generating a valid test report with all cases marked as
+#   "not run".
+# 2. The framework can also generate reports in the presence of breaks/signals.
+# 3. This could be done on the preprocessing utility that generates tests
+#    (gen/sync), but then it wouldn't allow bash substitutions on test
+#    names (test with variable test case counts, as e.g. the serial port
+#    tests, takes the baudrates to test as parameters).
 declare_test_cases "hello_from_c" "dummy_echo" "some_test" "sleep"
 
 function dummy_test_run() {
