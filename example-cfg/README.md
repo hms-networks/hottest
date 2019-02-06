@@ -34,12 +34,12 @@ Jenkins nodes (tests and boards respectively).
 already defined Jenkins test/nodes.
 
 * Pipelines: Contains json files for generating Jenkins pipelines. Used to
-replicate testplans.
+replicate test plans.
 
 * Sync: Contains json files for the "sync" script; the tool that synchronizes
 multiple nodes, build jobs and pipelines definitions with a Jenkins master.
 
-Note that the root of this folderstructure can be passed directly to the
+Note that the root of this folder structure can be passed directly to the
 "-I,--include" flag of sync, so we avoid passing the "chunks",
 "parametrization" and "pipelines" subdirectories as individual include flags.
 
@@ -117,7 +117,7 @@ Or just peek at the Jenkins job shell script:
 
 > ./scripts/cli/gen.py get-job-script -c chunks -c example-cfg/chunks -b board/dummyboard -t test/dummy-test -l anotherlabel
 
-See the "Running with the jenkins CLI" subsection on the "gen.py" appendix of
+See the "Running with the Jenkins CLI" subsection on the "gen.py" appendix of
 the root README.md file of this project if you are interested on how to send
 the generated jobs/nodes to a server through the Jenkins API.
 
@@ -161,7 +161,7 @@ Now we can generate tests, boards and parametrize them. This can already be
 fully automated by scripts but it's very tedious to do by hand. We can go a
 step further and automate the generation and synchronization (and backup) of all
 the server jobs, nodes and pipelines. This is exactly what "sync.py" does, you
-are to be dealing with "gen.py" direcly very seldom.
+are to be dealing with "gen.py" directly very seldom.
 
 You can peek at the sync file on "example-cfg/sync/localsetup.json". Ignore the
 "pipelines" property for now.
@@ -184,8 +184,8 @@ three sources:
  property.
 
 This may be confusing sometimes. You can use the "--dry-run-metadata" in
-combination with whitelists ("-w") to aid you developing and debuging
-complex parametrizations.
+combination with whitelists ("-w") to aid you developing and debugging
+complex parameterizations.
 
 > scripts/cli/sync.py http://localhost:8080 $USER <your jenkins token> sync -f example-cfg/sync/localsetup.json -c chunks -I example-cfg -r my-first-test-setup --dry-run-metadata -w succeeding\$
 
@@ -198,6 +198,6 @@ it references the Jenkins build jobs (tests) by the names they are given on the
 
 There isn't a great deal of complexity in a pipeline. It's just a series of
 build jobs that are all scheduled in some order. This allows to implement
-testplans (daily, weekly, per-device, etc.).
+test plans (daily, weekly, per-device, etc.).
 
 The file lies on "example-cfg/pipelines/daily-dummy.json" and has comments.

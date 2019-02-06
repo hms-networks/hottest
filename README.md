@@ -7,28 +7,31 @@ Linux-based firmware.
 Motivation:
 
 - Linaro's LAVA test framework was too big for our needs, a lot of resources
-  were required to keep us writing tests and up to date and with a sane setup
-  (there was an API  migration in place: old branch breakages). Some features
-  were missing too.
+  were required for keeping us writing tests and up to date with the project
+  (there was an API migration in place: old branch breakages). Some
+  uncontributable features were missing too (e.g. flashing/testing bootloaders).
 
-- We studied Fuego, but at the time we did the ability to be used by multiple
-  users on a single server, as Fuego's GIT repository was mounted on the server
-  filesystem. Two developers couldn't work at the same time on the same server,
-  which could be connected to expensive hardware or a complex setup.
+- We studied Fuego, but at the time it missed the ability to be used by multiple
+  users on a single server: Fuego's GIT repository was mounted on the server
+  filesystem, so two developers couldn't work at the same time on the same
+  server safely.
 
-So based on this previous experience with LAVA and taking a lot of inspiration
-from our previous Fuego evaluations we realized that using Jenkins as a base
-(as Fuego does) is an excellent idea.
+Based on this previous experience with LAVA and taking a lot of inspiration from
+our Fuego evaluations we realized that using Jenkins as a base (as Fuego does)
+is an excellent idea.
 
 Jenkins provides all the scheduling, interface (Web, REST, Python bindings), so
 the heavy duty work is already done. This project is a simple Jenkins
-customization. Based on this we created this project goals:
+customization/thin wrapper to turn it in a test server instead of a build
+server.
 
-- Able to cope with almost any special requirement, as to to flash bootloaders
-  with custom tools, flash NAND, etc.
-- Simple and explicit. No smart tricks and clever setups.
+We created this project with these goals:
+
+- Modularity: Able to cope with almost any special requirement, as to to flash
+  bootloaders with custom tools, flash NAND, etc.
+- Simple and explicit. Prefer no smart tricks and clever setups.
 - Customizable.
-- Able to run tests on a developer machine with an alredy booted and flased
+- Able to run tests on a developer machine with an already booted and flashed
   device.
 - Easy to develop and debug tests with.
 - Small code base.
@@ -55,7 +58,7 @@ some Jenkins entities with another name:
 - Jenkins pipeline -> Test plan. A Jenkins pipeline in Groovy can be used to
   enqueue many existing build jobs in parallel. The pipeline can be a single job
   that that either fails or succeeds as a whole. Daily, weekly and by-device
-  testplans are easily posible and can easily be remotely enqueued by using the
+  testplans are easily possible and can easily be remotely enqueued by using the
   existing jenkins REST API.
 
 The design principles are:
@@ -106,8 +109,8 @@ Install
 
 Follow the script's instructions.
 
-Quickstart
-==========
+Quick start
+===========
 
 This README is written as a reference guide. If you want to start tinkering in
 a more practical way you may want to start on "example-cfg/README.md"
@@ -125,7 +128,7 @@ concept is very simple.
 
 As we will see later, test "chunk"s can include (copy-paste) other test
 "chunk"s, so boards can use a "mixin" of available features (e.g. serial
-communication) without reeimplementing them every time.
+communication) without reimplementing them every time.
 
 We effectively build tests by iterating a root board and a root test chunk. By
 iterating we mean as following all the includes.
@@ -161,18 +164,18 @@ directives:
   always absolute to one of the chunk include directories on the generator
   script. It allows including the same chunk once and only once, so multiple
   chunks can include the same chunk without fear of code duplication or include
-  recursion, the chunk will be pasted only on the first occurence.
+  recursion, the chunk will be pasted only on the first occurrence.
 
 - "#|parameter-default-override <variable value>": Overrides the default value
-  of a job parameter. The variable name is just unquoted text that matchs the
+  of a job parameter. The variable name is just unquoted text that matches the
   same naming rules than the C language variables. The value can contain spaces
   or some enclosing quotes (useful if the variable starts with space). The
-  directive can overide many times the same parameter, in that case it will be
-  overriden to the last value found on the script iteration.
+  directive can override many times the same parameter, in that case it will be
+  overridden to the last value found on the script iteration.
 
 The syntax is short, but this alone doesn't give us enough to implement tests.
 We need some type of test API/framework. So the objective of the chunks is to
-allow implementing some standard functions that an intenal framework will run.
+allow implementing some standard functions that an internal framework will run.
 
 Test API overview
 -----------------
@@ -225,7 +228,7 @@ mandatory functions below:
 
 * dut_get SOURCE DEST: Copy files from the device.
 
-Then there are some standarized power-related functions that may or may not be
+Then there are some standardized power-related functions that may or may not be
 implemented depending on the setup. Note that a test (Jenkins job) hast to
 provide all or none of the next power-related functions listed below:
 
@@ -259,7 +262,7 @@ test flow:
 
 - test_case_set_not: As "test_case_set", but succeeds on a failing error code.
 
-From the Jenkins perspective a build job (test) only suceeds when all the test
+From the Jenkins perspective a build job (test) only succeeds when all the test
 cases passed, so the result is based on the "test_case_set" calls made, not on
 the return code of "test_run".
 
@@ -378,7 +381,7 @@ including "example-cfg" that lives on this repo.
 
 We are using --dry-run, so this command is not destructive. You will
 see that a folder with a backup of the instance state before running the
-command will appear on your current dir.
+command will appear on your current directory.
 
 You can filter which blocks of the sync script run with "-m,--mode":
 
@@ -411,7 +414,7 @@ Recommendations when building tests
   be used in a parameter while still keeping the test reusable by everyone.
 
 - It is perfectly fine that a test has to use the value of board a environment
-  variable. The jenkins parameter can reference board environment variables
+  variable. The Jenkins parameter can reference board environment variables
   with the "${YOUR_BOARD_ENVVAR}" syntax. Add the
   "#|board-require-env <YOUR_BOARD_ENVVAR>" clause to your test to do a runtime
   check.
@@ -503,7 +506,7 @@ Gets a testplan/pipeline.
 Running with the jenkins CLI
 ----------------------------
 
-You can pipe the output of the commands above to the jenkins cli like this. For
+You can pipe the output of the commands above to the Jenkins cli like this. For
 brevity we assume that they are stored in the file named "xmlfile":
 
 > export JENKLINS_CLI="java -jar jenkins-cli.jar -s <jenkins_url> -auth <your user>:<your token>"

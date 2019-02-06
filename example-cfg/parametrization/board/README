@@ -1,4 +1,4 @@
-This folder contains parametrizations/modifications for two boards of the
+This folder contains parameterizations/modifications for two boards of the
 "dummyboard" type. The ID is changed and an extra node label defined.
 
 This is used from the "sync" util file "sync/localsetup.json"
