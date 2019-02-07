@@ -107,7 +107,7 @@ Install
 
 > sudo -H pip install python-jenkins xunitgen jsonschema
 
-> JENKINS_HOME=<your desired jenkins install dir> scripts/install/jenkins-prepare.sh
+> JENKINS_HOME=your_desired_jenkins_install_dir scripts/install/jenkins-prepare.sh
 
 Follow the script's instructions.
 
