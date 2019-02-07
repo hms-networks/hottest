@@ -72,8 +72,8 @@ The design principles are:
 - Reuse existing infrastructure for the Web interface, task scheduling and user
   management: Jenkins. Rationale: Don't reinvent the (boring) wheel.
 
-- Prefer stock Jenkins while possible. No plugins. Rationale: Easy install and
-  maintenance. Less 3rd party dependencies that can be break and need to be
+- Prefer stock Jenkins while possible. Default plugins. Rationale: Easy install 
+  and maintenance. Less 3rd party dependencies that can be break and need to be
   tracked. Easy version updates.
 
 - Make all the test data to be contained on the test job itself (no
@@ -105,7 +105,7 @@ Install
 
 > sudo install sshpass gnuplot
 
-> sudo -H pip install python-jenkins xunitgen
+> sudo -H pip install python-jenkins xunitgen jsonschema
 
 > JENKINS_HOME=<your desired jenkins install dir> scripts/install/jenkins-prepare.sh
 
