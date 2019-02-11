@@ -741,10 +741,10 @@ function __on_exit() {
         __after_test_run "$1"
     fi
     __step_timeout_parse_wrap __run_ifdef dut_power_off
-    __before_exit "$1"
     local callparser="$__LOG_PARSER -f $__LOG_PARSER_MSGS_FILE -n $JOB_NAME"
     __process_measurements "$callparser"
     __process_test_results "$callparser"
+    __before_exit "$1"
     exit $?
 }
 trap __on_exit EXIT
