@@ -29,9 +29,11 @@ $REPO_ROOT/gitmodules/serio/serio --create-links --link-path=$REPO_ROOT/gitmodul
 cd $JENKINS_HOME
 
 cat << INFO
-run jenkins with:
+run Jenkins with:
 
- JENKINS_HOME=$JENKINS_HOME java -jar jenkins.war --httpPort=8080
+ export JENKINS_HOME=$JENKINS_HOME
+ cd \$JENKINS_HOME
+ java -jar jenkins.war --httpPort=8080
 
 if you don't have jenkins.war:
 
@@ -39,5 +41,7 @@ if you don't have jenkins.war:
 
 Install the Jenkins instance with the recommended set of plugins only. Follow
 the Jenkins install instructions.
+
+It is important that your pwd is \$JENKINS_HOME when starting Jenkins.
 
 INFO
